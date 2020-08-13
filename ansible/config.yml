@@ -45,9 +45,11 @@
     
     - name: ensure net.bridge.bridge-nf-call-iptables is set to 1
       sysctl:
-        name: net.bridge.bridge-nf-call-iptables
+        name: net.ipv4.ip_forward
         value: 1
+        sysctl_set: yes
         state: present
+        reload: yes
       ignore_errors: yes
     
     - name: add Kubernetes' YUM repository
