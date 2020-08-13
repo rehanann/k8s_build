@@ -32,11 +32,11 @@ resource "google_compute_instance" "controller" {
     destination = "/etc/ssh/sshd_config"
   }
 
-  connection {
-    user = "root"
-    type = "ssh"
-    private_key = "${file("${var.path}/rsa_root_key")}"
-  }
+  # connection {
+  #   user = "root"
+  #   type = "ssh"
+  #   private_key = "${file("${var.path}/rsa_root_key")}"
+  # }
 
 }
 
@@ -86,11 +86,11 @@ resource "google_compute_instance" "minion" {
     destination = "/etc/ssh/sshd_config"
   }
 
-  connection {
-    user = "root"
-    type = "ssh"
-    private_key = "${file("${var.path}/rsa_root_key")}"
-  }
+  # connection {
+  #   user = "root"
+  #   type = "ssh"
+  #   private_key = "${file("${var.path}/rsa_root_key")}"
+  # }
 
 }
 

@@ -2,7 +2,6 @@ pipeline {
   agent any
   environment {
     SVC_ACCOUNT_KEY = credentials('terraform-auth')
-    INVENTORY = credentials('INVENTORY_INI')
     VARIABLES = credentials('VARIABLES')
     PROVIDER = credentials('PROVIDER')
   }
@@ -11,7 +10,6 @@ pipeline {
                 steps {
                     checkout scm
                     sh 'echo $SVC_ACCOUNT_KEY | base64 -d > serviceaccount.json'
-                    // sh 'echo $INVENTORY  | base64 -d > inventory.ini'
                     sh 'echo $PROVIDER | base64 -d > provider.tf'
                     sh 'echo $VARIABLES | base64 -d > variable.tf'
                     }
@@ -32,8 +30,8 @@ pipeline {
         stage('TF Apply') {
                 steps {
                     sh 'terraform apply myplan'
-                    sh 'cp myplan ../gcp-destroy/'
-                    sh 'cp terraform.tfstate* ../gcp-destroy/'
+                    sh 'cp myplan ../k8s_destroy/'
+                    sh 'cp terraform.tfstate* ../k8s_destroy/'
                     sh 'sleep 60'
             }
         }
