@@ -27,10 +27,10 @@ resource "google_compute_instance" "controller" {
     ssh-keys = "${var.username}:${file("${var.path}/jenkins_key")}"
   }
 
-  provisioner "file" {
-    source = "${file("${var.path}/sshd_config")}"
-    destination = "/etc/ssh/sshd_config"
-  }
+  # provisioner "file" {
+  #   source = "${file("${var.path}/sshd_config")}"
+  #   destination = "/etc/ssh/sshd_config"
+  # }
 
   # connection {
   #   user = "root"
@@ -81,10 +81,10 @@ resource "google_compute_instance" "minion" {
     ssh-keys = "${var.username}:${file("${var.path}/jenkins_key")}"
   }
 
-  provisioner "file" {
-    source = "${file("${var.path}/sshd_config")}"
-    destination = "/etc/ssh/sshd_config"
-  }
+  # provisioner "file" {
+  #   source = "${file("${var.path}/sshd_config")}"
+  #   destination = "/etc/ssh/sshd_config"
+  # }
 
   # connection {
   #   user = "root"
