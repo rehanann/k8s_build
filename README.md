@@ -1,4 +1,4 @@
-# Deme: Kubernetes 1.17 installation
+# Demo: Kubernetes 1.17 installation
 
 ## Archicture
 * Master 1
