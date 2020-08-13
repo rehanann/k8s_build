@@ -45,7 +45,7 @@ pipeline {
         // }
         stage('Docker storage') {
             steps {
-                    sh 'ansible-playbook -i host.ini ansible-pb/config.yml'
+                    sh 'ansible-playbook -i host.ini ansible/config.yml'
                     sh 'ansible-playbook -i host.ini ansible/docker-storage-setup-ofs.yml'
                     sh 'ansible-playbook -i ansible/kubectl.yaml'
             }
