@@ -3,6 +3,6 @@
   tasks:
     - name: install kubectl
       yum:
-        name: kubectl-1.14.0
+        name: kubectl-1.17.0
         state: present
         allow_downgrade: yes
