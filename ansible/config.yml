@@ -62,7 +62,7 @@
     
     - name: install kubelet
       yum:
-        name: kubelet-1.18.0
+        name: kubelet-1.14.0
         state: present
         update_cache: true
     
