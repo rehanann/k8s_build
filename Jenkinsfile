@@ -11,7 +11,7 @@ pipeline {
                 steps {
                     checkout scm
                     sh 'echo $SVC_ACCOUNT_KEY | base64 -d > serviceaccount.json'
-                    sh 'echo $INVENTORY  | base64 -d > inventory.ini'
+                    // sh 'echo $INVENTORY  | base64 -d > inventory.ini'
                     sh 'echo $PROVIDER | base64 -d > provider.tf'
                     sh 'echo $VARIABLES | base64 -d > variable.tf'
                     }
@@ -37,13 +37,13 @@ pipeline {
                     sh 'sleep 60'
             }
         }
-        stage('Pre-req Installation') {
-                steps {
-                    sh 'export ANSIBLE_HOST_KEY_CHECKING=False'
-                    sh 'ansible-playbook -i inventory.ini ansible-pb/config.yml'
-                    sh 'sleep 120'
-                }
-        }
+        // stage('Pre-req Installation') {
+        //         steps {
+        //             sh 'export ANSIBLE_HOST_KEY_CHECKING=False'
+        //             sh 'ansible-playbook -i inventory.ini ansible-pb/config.yml'
+        //             sh 'sleep 120'
+        //         }
+        // }
         // stage('Docker storage') {
         //     steps {
         //             sh 'ansible-playbook -i inventory.ini ansible-pb/docker-storage-setup-ofs.yml'
