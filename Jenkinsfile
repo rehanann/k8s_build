@@ -36,28 +36,13 @@ pipeline {
                     sh 'sleep 60'
             }
         }
-        // stage('Pre-req Installation') {
-        //         steps {
-        //             sh 'export ANSIBLE_HOST_KEY_CHECKING=False'
-        //             sh 'ansible-playbook -i inventory.ini ansible-pb/config.yml'
-        //             sh 'sleep 120'
-        //         }
-        // }
         stage('Docker storage') {
             steps {
                     sh 'ansible-playbook -i host.ini ansible/config.yml'
                     sh 'ansible-playbook -i host.ini ansible/docker-storage-setup-ofs.yml'
-                    sh 'ansible-playbook -i host.ini ansible/kubectl.yaml'
                     sh 'ansible-playbook -i host.ini ansible/masters.yml'
                     sh 'ansible-playbook -i host.ini ansible/worker.yml'
             }
         }
-        // stage('OpenShift Installation') {
-        //     steps {
-        //             sh 'ansible-playbook -i inventory.ini openshift-ansible/playbooks/prerequisites.yml'
-        //             sh 'ansible-playbook -i inventory.ini openshift-ansible/playbooks/deploy_cluster.yml'
-        //             sh '/usr/local/bin/oc get nodes'
-        //     }
-        // }
     }
 }

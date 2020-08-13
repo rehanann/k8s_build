@@ -2,6 +2,12 @@
   become: yes
   become_user: root
   tasks:
+    - name: install kubectl
+      yum:
+        name: kubectl-1.17.0
+        state: present
+        allow_downgrade: yes
+
     - name: initialize the cluster
       shell: kubeadm init --pod-network-cidr=10.244.0.0/16 >> cluster_initialized.txt
       args:
@@ -26,7 +32,6 @@
     - name: install Pod network
       become: yes
       become_user: root
-      #   shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml >> pod_network_setup.txt
       shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml >> pod_network_setup.txt
       args:
         chdir: $HOME
