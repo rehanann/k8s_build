@@ -47,7 +47,7 @@ pipeline {
             steps {
                     sh 'ansible-playbook -i host.ini ansible/config.yml'
                     sh 'ansible-playbook -i host.ini ansible/docker-storage-setup-ofs.yml'
-                    sh 'ansible-playbook -i ansible/kubectl.yaml'
+                    sh 'ansible-playbook -i host.ini ansible/kubectl.yaml'
             }
         }
         // stage('OpenShift Installation') {
