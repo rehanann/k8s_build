@@ -40,16 +40,16 @@ resource "google_compute_instance" "controller" {
 
 }
 
-resource "google_compute_disk" "controller-1" {
+resource "google_compute_disk" "controller" {
     name = "cdocker"
     type = "pd-ssd"
     zone = "${"${var.region}"}-a"
     size = "10"
 }
 
-resource "google_compute_attached_disk" "controller-1" {
-    disk = "${google_compute_disk.controller-1.self_link}"
-    instance = "${google_compute_instance.controller-1.self_link}"
+resource "google_compute_attached_disk" "controller" {
+    disk = "${google_compute_disk.controller.self_link}"
+    instance = "${google_compute_instance.controller.self_link}"
 }
 
 resource "google_compute_instance" "minion" {
