@@ -1,5 +1,6 @@
 - hosts: masters
   become: yes
+  become_user: root
   gather_facts: false
   tasks:
     - name: get join command
