@@ -60,9 +60,6 @@
         src:  /dev/mapper/vg_docker-lv_docker
         fstype: xfs
         state: present
-    
-    - name: Install Docker
-      package: name=docker state=present
 
     - name: start docker
       service: name=docker state=restarted enabled=true
