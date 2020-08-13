@@ -36,10 +36,12 @@
     
     - name: disable SElinux
       command: setenforce 0
+      ignore_errors: yes
     
     - name: disable SELinux on reboot
       selinux:
         state: disabled
+      ignore_errors: yes
     
     - name: ensure net.bridge.bridge-nf-call-iptables is set to 1
       sysctl:
