@@ -92,9 +92,4 @@
         seconds: 10
 
     - name: Rebooting
-      command: shutdown -r now "Reboot required for updated kernel"
-      async: 0
-      poll: 0
-      ignore_errors: true
-      when: reboot_hint.stdout.find("reboot") != -1
-      register: rebooting
+      reboot:
