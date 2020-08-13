@@ -1,0 +1,8 @@
+- hosts: master
+  become: yes
+  tasks:
+    - name: install kubectl
+      yum:
+        name: kubectl-1.18.0
+        state: present
+        allow_downgrade: yes

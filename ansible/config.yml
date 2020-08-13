@@ -1,0 +1,101 @@
+---
+- hosts: nodes
+  become: yes
+  become_user: root
+  tasks:
+    - name: install yum utils
+      yum:
+        name: yum-utils
+        state: latest
+    - name: Install pre-req
+      yum:
+        name:
+          - wget
+          - git
+          - net-tools
+          - bind-utils
+          - iptables-services
+          - bridge-utils
+          - bash-completion
+          - kexec-tools 
+          - sos
+          - psacct
+          - bash-completion
+          - kexec-tools
+        state: present
+    - name: Update Centos kernel
+      yum:
+        name: "*"
+        state: latest
+    
+    - name: Install Docker
+      yum:
+        name:
+           - docker
+        state: present
+    
+    - name: disable SElinux
+      command: setenforce 0
+    
+    - name: disable SELinux on reboot
+      selinux:
+        state: disabled
+    
+    - name: ensure net.bridge.bridge-nf-call-ip6tables is set to 1
+      sysctl:
+        name: net.bridge.bridge-nf-call-ip6tables
+        value: 1
+        state: present
+    
+    - name: ensure net.bridge.bridge-nf-call-iptables is set to 1
+      sysctl:
+        name: net.bridge.bridge-nf-call-iptables
+        value: 1
+        state: present
+    
+    - name: add Kubernetes' YUM repository
+      yum_repository:
+        name: Kubernetes
+        description: Kubernetes YUM repository
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+        gpgcheck: yes
+    
+    - name: install kubelet
+      yum:
+        name: kubelet-1.18.0
+        state: present
+        update_cache: true
+    
+    - name: install kubeadm
+      yum:
+        name: kubeadm-1.14.0
+        state: present
+    
+    - name: start kubelet
+      service:
+        name: kubelet
+        enabled: yes
+        state: started
+      
+    - name: Make sure a docker is running
+      systemd:
+        state: started
+        name: docker
+        
+    - name: restart system to reboot to newest kernel
+      shell: "sleep 5 && reboot"
+      async: 1
+      poll: 0
+    
+    - name: wait for 10 seconds
+      pause:
+        seconds: 10
+
+    - name: Rebooting
+      command: shutdown -r now "Reboot required for updated kernel"
+      async: 0
+      poll: 0
+      ignore_errors: true
+      when: reboot_hint.stdout.find("reboot") != -1
+      register: rebooting

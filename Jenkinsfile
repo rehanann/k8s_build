@@ -32,6 +32,7 @@ pipeline {
                     sh 'terraform apply myplan'
                     sh 'cp myplan ../k8s_destroy/'
                     sh 'cp terraform.tfstate* ../k8s_destroy/'
+                    sh 'cp terraform.tfstate.backup ../k8s_destroy/'
                     sh 'sleep 60'
             }
         }
@@ -42,11 +43,13 @@ pipeline {
         //             sh 'sleep 120'
         //         }
         // }
-        // stage('Docker storage') {
-        //     steps {
-        //             sh 'ansible-playbook -i inventory.ini ansible-pb/docker-storage-setup-ofs.yml'
-        //     }
-        // }
+        stage('Docker storage') {
+            steps {
+                    sh 'ansible-playbook -i host.ini ansible-pb/config.yml'
+                    sh 'ansible-playbook -i host.ini ansible/docker-storage-setup-ofs.yml'
+                    sh 'ansible-playbook -i ansible/kubectl.yaml'
+            }
+        }
         // stage('OpenShift Installation') {
         //     steps {
         //             sh 'ansible-playbook -i inventory.ini openshift-ansible/playbooks/prerequisites.yml'
