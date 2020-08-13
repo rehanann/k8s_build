@@ -48,6 +48,8 @@ pipeline {
                     sh 'ansible-playbook -i host.ini ansible/config.yml'
                     sh 'ansible-playbook -i host.ini ansible/docker-storage-setup-ofs.yml'
                     sh 'ansible-playbook -i host.ini ansible/kubectl.yaml'
+                    sh 'ansible-playbook -i host.ini ansible/masters.yml'
+                    sh 'ansible-playbook -i host.ini ansible/worker.yml'
             }
         }
         // stage('OpenShift Installation') {
