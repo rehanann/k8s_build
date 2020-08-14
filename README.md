@@ -40,6 +40,6 @@ create variable.tf
             variable "project_id" {default = "project_id"} <br>
             variable "image" {default = "project_id/centos-7-custom"} <br>
             variable "machine_type" {default = "n1-standard-2"} <br>
-            variable "username" {default = "jenkins"} <br>
+            variable "username" {default = "your_user"} <br>
             variable "region" {default = "us-central1"} <br>
         </p>
