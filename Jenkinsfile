@@ -42,6 +42,7 @@ pipeline {
                     sh 'ansible-playbook -i host.ini ansible/docker-storage-setup-ofs.yml'
                     sh 'ansible-playbook -i host.ini ansible/masters.yml'
                     sh 'ansible-playbook -i host.ini ansible/worker.yml'
+                    sh 'ansible-playbook -i host.ini ansible/kubeconfig.yml'
             }
         }
     }

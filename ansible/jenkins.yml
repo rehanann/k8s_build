@@ -1,0 +1,12 @@
+---
+- hosts: bastions
+  tasks:
+    - name: create deployment
+      k8s:
+        state: present
+        definition: "{{ lookup('file', 'config/deployment.yml') | from_yaml }}"
+    
+    - name: create service
+      k8s:
+        state: present
+        definition: "{{ lookup('file', 'config/service.yml') | from_yaml }}"
