@@ -20,18 +20,26 @@
 * ansible-playbook -i host.ini ansible/worker.yml
   
 
-* create provide.tf
+<p> 
+create provide.tf
+</p>
+</>
+<p>
+    provider "google" {  <br>
+        project = "project-id" <br>
+        region  = "us-central1" <br>
+        credentials = "${file("${var.path}/credes.json")}" <br>
+    }
+</p>
 
-*   provider "google" {
-*       project = "project-id"
-*       region  = "us-central1"
-*       credentials = "${file("${var.path}/credes.json")}"
-*   }
-
-* create variable.tf
-*   variable "path" {default = "/var/lib/jenkins/secerts"}
-*   variable "project_id" {default = "project_id"}
-*   variable "image" {default = "project_id/centos-7-custom"}
-*   variable "machine_type" {default = "n1-standard-2"}
-*   variable "username" {default = "jenkins"}
-*   variable "region" {default = "us-central1"}
+<p>
+create variable.tf
+</p>
+        <p> 
+        variable "path" {default = "/var/lib/jenkins/  secerts"} <br>
+            variable "project_id" {default = "project_id"} <br>
+            variable "image" {default = "project_id/centos-7-custom"} <br>
+            variable "machine_type" {default = "n1-standard-2"} <br>
+            variable "username" {default = "jenkins"} <br>
+            variable "region" {default = "us-central1"} <br>
+        </p>
