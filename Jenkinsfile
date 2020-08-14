@@ -43,6 +43,7 @@ pipeline {
                     sh 'ansible-playbook -i host.ini ansible/masters.yml'
                     sh 'ansible-playbook -i host.ini ansible/worker.yml'
                     sh 'ansible-playbook -i host.ini ansible/kubeconfig.yml'
+                    sh 'ansible-playbook -i host.ini ansible/jenkins.yml'
             }
         }
     }
