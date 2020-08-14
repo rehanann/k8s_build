@@ -21,16 +21,17 @@
   
 
 * create provide.tf
-provider "google" {
-    project = "project-id"
-    region  = "us-central1"
-    credentials = "${file("${var.path}/credes.json")}"
-}
+
+*   provider "google" {
+*       project = "project-id"
+*       region  = "us-central1"
+*       credentials = "${file("${var.path}/credes.json")}"
+*   }
 
 * create variable.tf
-variable "path" {default = "/var/lib/jenkins/secerts"}
-variable "project_id" {default = "project_id"}
-variable "image" {default = "project_id/centos-7-custom"}
-variable "machine_type" {default = "n1-standard-2"}
-variable "username" {default = "jenkins"}
-variable "region" {default = "us-central1"}
+*   variable "path" {default = "/var/lib/jenkins/secerts"}
+*   variable "project_id" {default = "project_id"}
+*   variable "image" {default = "project_id/centos-7-custom"}
+*   variable "machine_type" {default = "n1-standard-2"}
+*   variable "username" {default = "jenkins"}
+*   variable "region" {default = "us-central1"}
