@@ -4,9 +4,9 @@
     - name: create deployment
       k8s:
         state: present
-        definition: "{{ lookup('file', 'ansible/config/deployment.yml') | from_yaml }}"
+        definition: "{{ lookup('file', 'config/deployment.yml') | from_yaml }}"
     
     - name: create service
       k8s:
         state: present
-        definition: "{{ lookup('file', 'ansible/config/service.yml') | from_yaml }}"
+        definition: "{{ lookup('file', 'config/service.yml') | from_yaml }}"
