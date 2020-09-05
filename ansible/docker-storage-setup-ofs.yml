@@ -1,5 +1,5 @@
 ---
-- hosts: bastion
+- hosts: bastions
   become: yes
   become_user: jenkins
 
@@ -91,7 +91,7 @@
       ignore_errors: yes
 
 
-- hosts: bastion
+- hosts: bastions
   become: yes
   become_user: jenkins
 
