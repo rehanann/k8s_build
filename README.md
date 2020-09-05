@@ -18,6 +18,7 @@
 * ansible-playbook -i host.ini ansible/docker-storage-setup-ofs.yml
 * ansible-playbook -i host.ini ansible/masters.yml
 * ansible-playbook -i host.ini ansible/worker.yml
+* ansible-playbook -i host.ini ansible/jenkins.yml
   
 
 <p> 
