@@ -8,13 +8,13 @@
     - name: Drain pods from node
       command: kubectl drain "{{ item }}" --force
       with_items:
-        - "inventory_hostname == groups.dev"
+        - "{{ groups['dev'] }}"
 
 
     - name: Cordon(Unschedule) node for pods service
       command: kubectl uncordon "{{ item }}"
       with_items:
-        - "inventory_hostname == groups.dev"
+        - "{{ groups['dev'] }}"
       
     - name: stop Kubelet service
       service: name=kubelet.service state=stopped
@@ -88,5 +88,5 @@
     - name: Uncordon Node for pods scheduling
       command: kubectl cordon "{{ item }}"
       with_items:
-        - "inventory_hostname == groups.dev"
+        - "{{ groups['dev'] }}"
 
