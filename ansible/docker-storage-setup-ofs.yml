@@ -1,8 +1,25 @@
 ---
-- hosts: nodes
+- hosts: dev
   become: yes
   become_user: root
+  
   tasks:
+
+    - name: Drain pods from node
+      command: kubectl drain "{{ item }}" --force
+      with_items:
+        - "inventory_hostname == groups.dev"
+
+
+    - name: Cordon(Unschedule) node for pods service
+      command: kubectl uncordon "{{ item }}"
+      with_items:
+        - "inventory_hostname == groups.dev"
+      
+    - name: stop Kubelet service
+      service: name=kubelet.service state=stopped
+      ignore_errors: yes
+  
     - name: stop docker
       service: name=docker state=stopped
       ignore_errors: yes
@@ -63,3 +80,13 @@
 
     - name: start docker
       service: name=docker state=restarted enabled=true
+
+    - name: start kubelet 
+      service: name=kubelet.service state=started
+      ignore_errors: yes
+
+    - name: Uncordon Node for pods scheduling
+      command: kubectl cordon "{{ item }}"
+      with_items:
+        - "inventory_hostname == groups.dev"
+
