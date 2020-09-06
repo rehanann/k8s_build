@@ -1,4 +1,14 @@
 ---
+- hosts: '{{ name }}'
+  become: yes
+  become_user: root
+  
+  tasks:
+  
+  - name: stop kubernetes serve
+    shell: rename yaml yaml_ /etc/kubernetes/manifests/*  
+    
+
 - hosts: bastions
   become: yes
   become_user: jenkins
@@ -89,6 +99,9 @@
     - name: start kubelet 
       service: name=kubelet.service state=started
       ignore_errors: yes
+
+    - name: start kubernetes server
+      shell: rename yaml_ yaml /etc/kubernetes/manifests/* 
 
 
 - hosts: bastions
