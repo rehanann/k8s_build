@@ -15,7 +15,7 @@
         - "{{ groups['dev'] }}"
 
 
-- hosts: dev
+- hosts: '{{ name }}'
   become: yes
   become_user: root
   
