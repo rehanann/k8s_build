@@ -7,12 +7,12 @@
     - name: Drain pods from node
       command: kubectl drain "{{ item }}" --force
       with_items:
-        - "{{ groups[ {{ name }} ] }}"
+        - "{{ groups[ name ] }}"
 
     - name: Cordon(Unschedule) node for pods service
       command: kubectl uncordon "{{ item }}"
       with_items:
-        - "{{ groups[ {{ name }} ] }}"
+        - "{{ groups[ name ] }}"
 
 
 - hosts: '{{ name }}'
@@ -99,5 +99,5 @@
     - name: Uncordon Node for pods scheduling
       command: kubectl cordon "{{ item }}"
       with_items:
-        - "{{ groups[ {{ name }} ] }}"
+        - "{{ groups[ name ] }}"
 
